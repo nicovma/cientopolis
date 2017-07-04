@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
             android:id="@+id/my_workflows"
             android:icon="@drawable/ic_menu_camera"
             android:title="Mis Muestras/WF" />

@@ -48,11 +48,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Fragment fragment = new MainFragment();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_main, fragment);
-        ft.commit();
+        goToMain();
     }
 
     @Override
@@ -117,8 +113,19 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.logout) {
             // logout
 
+        } else if (id == R.id.home){
+            //home
+            goToMain();
         }
 
         return true;
+    }
+
+    public void goToMain(){
+        Fragment fragment = new MainFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.content_main, fragment);
+        ft.commit();
     }
 }

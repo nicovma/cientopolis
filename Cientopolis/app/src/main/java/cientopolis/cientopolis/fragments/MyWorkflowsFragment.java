@@ -21,12 +21,14 @@ import java.util.List;
 
 import cientopolis.cientopolis.R;
 import cientopolis.cientopolis.adapters.WorkflowAdapter;
+import cientopolis.cientopolis.interfaces.RequestControllerListener;
+import cientopolis.cientopolis.model.ResponseDTO;
 
 /**
  * Created by nicolas.valentini on 2/7/17.
  */
 
-public class MyWorkflowsFragment extends Fragment {
+public class MyWorkflowsFragment extends Fragment implements RequestControllerListener<String> {
 
     private View view;
     private RecyclerView recycler;
@@ -45,8 +47,8 @@ public class MyWorkflowsFragment extends Fragment {
         downloading.setVisibility(View.VISIBLE);
         Animation ballAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.ball_animation);
         ballAnimation.setRepeatCount(Animation.INFINITE);
-        ImageView ball = (ImageView) view.findViewById(R.id.ball);
-        ball.startAnimation(ballAnimation);
+        ImageView logo = (ImageView) view.findViewById(R.id.logo);
+        logo.startAnimation(ballAnimation);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         error = view.findViewById(R.id.error);
         textError = (TextView) error.findViewById(R.id.text_error);
@@ -54,19 +56,22 @@ public class MyWorkflowsFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //RefreshView
-                //requestController.get(new TypeToken<ResponseDTO<List<Match>>>() {}.getType(), "/games/mygames", 6, params);
+                mSwipeRefreshLayout.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
+                downloading.setVisibility(View.VISIBLE);
+                error.setVisibility(View.GONE);
+                recycler.setVisibility(View.GONE);
+                //requestController.get(new TypeToken<ResponseDTO<List<Project>>>() {}.getType(), "/projects/myprojects", 6, params);
             }
         });
         retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //RefreshView
-                //requestController.get(new TypeToken<ResponseDTO<List<Match>>>() {}.getType(), "/games/mygames", 6, params);
-                //downloading.setVisibility(View.VISIBLE);
-                //error.setVisibility(View.GONE);
-                //recycler.setVisibility(View.GONE);
-                //mSwipeRefreshLayout.setVisibility(View.GONE);
+                //requestController.get(new TypeToken<ResponseDTO<List<Project>>>() {}.getType(), "/projects/myprojects", 6, params);
+                downloading.setVisibility(View.VISIBLE);
+                error.setVisibility(View.GONE);
+                recycler.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setVisibility(View.GONE);
             }
         });
         if (savedInstanceState == null ) {
@@ -86,6 +91,11 @@ public class MyWorkflowsFragment extends Fragment {
         cientifics.add("Diego Torres");
         cientifics.add("Juan Perez");
         cientifics.add("Jose Gomez");
+        cientifics.add("Jose Gomez");
+        cientifics.add("Jose Gomez");
+        cientifics.add("Jose Gomez");
+        cientifics.add("Jose Gomez");
+        cientifics.add("Jose Gomez");
         if(cientifics.size()>0){
             downloading.setVisibility(View.GONE);
             error.setVisibility(View.GONE);
@@ -104,4 +114,13 @@ public class MyWorkflowsFragment extends Fragment {
 
     }
 
+    @Override
+    public void responseOk(Integer id, ResponseDTO<String> response) {
+
+    }
+
+    @Override
+    public void responseError(Integer id, ResponseDTO<String> response) {
+
+    }
 }

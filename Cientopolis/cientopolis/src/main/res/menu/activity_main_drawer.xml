@@ -5,19 +5,20 @@
         <item
             android:id="@+id/home"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="Inicio" />
         <item
-            android:id="@+id/my_workflows"
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_profile"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/workflows"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Mis Muestras/WF" />
-        <item
-            android:id="@+id/search_workflow"
-            android:icon="@drawable/ic_search"
-            android:title="Buscar un WF" />
+            android:title="Proyectos" />
+
         <item
             android:id="@+id/logout"
             android:icon="@drawable/logout"
-            android:title="Cerrar Sesion" />
+            android:title="Iniciar Sesion" />
     </group>
 
 

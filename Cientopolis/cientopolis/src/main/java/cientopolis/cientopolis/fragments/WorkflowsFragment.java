@@ -1,7 +1,5 @@
 package cientopolis.cientopolis.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,13 +20,16 @@ import java.util.List;
 import cientopolis.cientopolis.R;
 import cientopolis.cientopolis.adapters.WorkflowAdapter;
 import cientopolis.cientopolis.interfaces.RequestControllerListener;
+import cientopolis.cientopolis.interfaces.WorkflowClickListener;
 import cientopolis.cientopolis.model.ResponseDTO;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 /**
  * Created by nicolas.valentini on 2/7/17.
  */
 
-public class MyWorkflowsFragment extends Fragment implements RequestControllerListener<String> {
+public class WorkflowsFragment extends Fragment implements RequestControllerListener<String> {
 
     private View view;
     private RecyclerView recycler;
@@ -45,7 +46,7 @@ public class MyWorkflowsFragment extends Fragment implements RequestControllerLi
         recycler.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         downloading = view.findViewById(R.id.cargando);
         downloading.setVisibility(View.VISIBLE);
-        Animation ballAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.ball_animation);
+        Animation ballAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.brand_animation);
         ballAnimation.setRepeatCount(Animation.INFINITE);
         ImageView logo = (ImageView) view.findViewById(R.id.logo);
         logo.startAnimation(ballAnimation);
@@ -101,7 +102,16 @@ public class MyWorkflowsFragment extends Fragment implements RequestControllerLi
             error.setVisibility(View.GONE);
             recycler.setVisibility(View.VISIBLE);
             mSwipeRefreshLayout.setVisibility(View.VISIBLE);
-            recycler.setAdapter(new WorkflowAdapter(cientifics));
+            recycler.setAdapter(new WorkflowAdapter(cientifics, new WorkflowClickListener() {
+                @Override
+                public void clicked(Integer id) {
+                    Fragment fragment = new WorklowDetailfragment();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.content_main, fragment);
+                    ft.commit();
+                }
+            }));
         }
         else {
             retry.setVisibility(View.GONE);

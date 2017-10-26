@@ -16,8 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import cientopolis.cientopolis.fragments.LoginFragment;
 import cientopolis.cientopolis.fragments.MainFragment;
-import cientopolis.cientopolis.fragments.MyWorkflowsFragment;
+import cientopolis.cientopolis.fragments.WorkflowsFragment;
 import cientopolis.cientopolis.fragments.SearchWorkflowFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -91,19 +92,16 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        if (id == R.id.my_workflows) {
-            // See my workflows
-            // Create a new fragment and specify the planet to show based on position
-            Fragment fragment = new MyWorkflowsFragment();
-            // Insert the fragment by replacing any existing fragment
-
+        if (id == R.id.workflows) {
+            // See workflows
+            Fragment fragment = new WorkflowsFragment();
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.content_main, fragment);
             ft.commit();
 
 
-        } else if (id == R.id.search_workflow) {
+        } else if (id == R.id.profile) {
             // look for a workflows
             Fragment fragment = new SearchWorkflowFragment();
             FragmentManager fm = getSupportFragmentManager();
@@ -112,6 +110,11 @@ public class MainActivity extends AppCompatActivity
             ft.commit();
         } else if (id == R.id.logout) {
             // logout
+            Fragment fragment = new LoginFragment();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.content_main, fragment);
+            ft.commit();
 
         } else if (id == R.id.home){
             //home
